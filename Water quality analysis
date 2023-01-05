@@ -34,3 +34,27 @@ figure = px.histogram(data, x = "Sulfate",
                       color = "Potability", 
                       title= "Factors Affecting Water Quality: Sulfate")
 figure.show()
+figure = px.histogram(data, x = "Conductivity", 
+                      color = "Potability", 
+                      title= "Factors Affecting Water Quality: Conductivity")
+figure.show()
+figure = px.histogram(data, x = "Organic_carbon", 
+                      color = "Potability", 
+                      title= "Factors Affecting Water Quality: Organic Carbon")
+figure.show()
+figure = px.histogram(data, x = "Trihalomethanes", 
+                      color = "Potability", 
+                      title= "Factors Affecting Water Quality: Trihalomethanes")
+figure.show()
+figure = px.histogram(data, x = "Turbidity", 
+                      color = "Potability", 
+                      title= "Factors Affecting Water Quality: Turbidity")
+figure.show()
+correlation = data.corr()
+correlation["ph"].sort_values(ascending=False)
+from pycaret.classification import *
+clf = setup(data, target = "Potability", silent = True, session_id = 786)
+compare_models()
+model = create_model("rf")
+predict = predict_model(model, data=data)
+predict.head()
